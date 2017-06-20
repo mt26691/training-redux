@@ -6,6 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Counter from './containers/Counter';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         <Header />
         <ConnectedRouter history={this.props.history}>
           <Switch>
+            <Route path="/counter" component={Counter} />
             <Route path="/" render={() =>
               <div className="App">
                 <div className="App-header">

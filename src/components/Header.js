@@ -1,0 +1,16 @@
+import React, { Component } from 'react';
+
+
+class Header extends Component {
+	render() {
+		return (
+			<h1 className="text-center">
+				This is a header
+	 </h1>
+		);
+	}
+}
+
+
+
+export default Header;

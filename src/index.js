@@ -10,7 +10,8 @@ import reduxThunk from 'redux-thunk';
 import reduxPromise from 'redux-promise';
 import { applyMiddleware, compose, createStore } from 'redux'
 import history from './common/history';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import './styles/site.css';
 
 const store = createStore(
 	connectRouter(history)(rootReducer),

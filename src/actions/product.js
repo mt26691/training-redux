@@ -17,16 +17,39 @@ function saveProducts(products) {
 
 export function getProducts(page = 1, pageSize = 5) {
 	var products = getAllProducts();
+
 	return function (dispath) {
-		dispath({ type: Types.GET_PRODUCTS, payload: products });
+		setTimeout(() => {
+			dispath({ type: Types.GET_PRODUCTS, payload: products });
+		}, 100);
 	}
 }
 
-export function getProduct(productId) {
+export function getProduct(id) {
+	var products = getAllProducts();
+	var product = null;
 
-	return {
-		type: Types.GET_PRODUCT
-	};
+	if (id == null) {
+		product = {
+			id: null,
+			name: '',
+			description: '',
+			price: '',
+		}
+	}
+	else {
+		product = products.find(t => t.id === id);
+	}
+	
+
+	return function (dispath) {
+		setTimeout(() => {
+			dispath({
+				type: Types.GET_PRODUCT,
+				payload: product
+			});
+		}, 100);
+	}
 }
 
 export function saveProduct(product) {

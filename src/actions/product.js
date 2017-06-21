@@ -75,6 +75,8 @@ export function saveProduct(product) {
 	};
 }
 
+
+
 export function deleteProduct(productId) {
 	return {
 		type: Types.DELETE_PRODUCT

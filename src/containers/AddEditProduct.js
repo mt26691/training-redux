@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getProduct, saveProduct } from '../actions/product';
 import HorizontalField from '../components/form/HorizontalField';
 import DatePicker from '../components/form/DatePicker';
+import PropTypes from 'prop-types';
 
 class AddEditProduct extends React.Component {
 
@@ -86,6 +87,11 @@ function mapStateToProp(state) {
 		message:state.product.message
 	};
 }
+AddEditProduct.propTypes = {
+  isOk: PropTypes.bool,
+  initialValues: PropTypes.object,
+  message: PropTypes.string
+}
 
 
 function validate(values) {
@@ -119,5 +125,7 @@ AddEditProduct = connect(
 	{ getProduct, saveProduct }
 
 )(AddEditProduct);
+
+
 
 export default AddEditProduct;

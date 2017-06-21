@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 import { getProduct, saveProduct } from '../actions/product';
 import HorizontalField from '../components/form/HorizontalField';
+import DatePicker from '../components/form/DatePicker';
 
 class AddEditProduct extends React.Component {
 
@@ -44,6 +45,7 @@ class AddEditProduct extends React.Component {
 						<Field name="name" className="form-control" type="text" label="Name" component={HorizontalField} />
 						<Field name="price" className="form-control" type="text" label="Price" component={HorizontalField} />
 						<Field name="description" className="form-control" type="text" label="Description" component={HorizontalField} />
+						<Field name="creationDate" className="form-control date-picker-input" type="text" label="Creation Date" component={DatePicker} />
 						{this.renderMessage()}
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary edit-button-width"><i className="fa fa-floppy-o"></i> Lưu</button>
@@ -93,6 +95,10 @@ function validate(values) {
 	}
 	if (!values.description) {
 		errors.description = 'Description name is required';
+	}
+	if(!values.creationDate)
+	{
+		errors.creationDate = 'Creation date is required';
 	}
 	return errors;
 }

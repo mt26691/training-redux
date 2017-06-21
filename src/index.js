@@ -10,6 +10,8 @@ import reduxPromise from 'redux-promise';
 import { applyMiddleware, compose, createStore } from 'redux'
 import history from './common/history';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import './styles/site.css';
 import  InitData from './common/InitData';
 

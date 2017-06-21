@@ -7,28 +7,23 @@ import { Route, Switch } from 'react-router';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Counter from './containers/Counter';
+import ProductList from './containers/ProductList';
+import NotFound from './components/NotFound';
 
 class App extends Component {
   render() {
     return (
       <main>
         <Header />
-        <ConnectedRouter history={this.props.history}>
-          <Switch>
-            <Route path="/counter" component={Counter} />
-            <Route path="/" render={() =>
-              <div className="App">
-                <div className="App-header">
-                  <img src={logo} className="App-logo" alt="logo" />
-                  <h2>Welcome to React</h2>
-                </div>
-                <p className="App-intro">
-                  To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-              </div>
-            } />
-          </Switch>
-        </ConnectedRouter>
+        <main className="container">
+          <ConnectedRouter history={this.props.history}>
+            <Switch>
+              <Route exact path="/" component={ProductList} />
+              <Route path="/counter" component={Counter} />
+              <Route component={NotFound} />
+            </Switch>
+          </ConnectedRouter>
+        </main>
         <Footer />
       </main>
     );

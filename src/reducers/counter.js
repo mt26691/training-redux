@@ -1,4 +1,4 @@
-import * as Types from '../common/types';
+import Types from '../common/types';
 
 const counterReducer = (state = 0, action) => {
 	switch (action.type) {

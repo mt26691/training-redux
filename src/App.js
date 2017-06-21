@@ -10,6 +10,7 @@ import Counter from './containers/Counter';
 import ProductDetail from './containers/ProductDetail';
 import ProductList from './containers/ProductList';
 import NotFound from './components/NotFound';
+import AddEditProduct from './containers/AddEditProduct';
 
 class App extends Component {
   render() {
@@ -22,6 +23,8 @@ class App extends Component {
               <Route exact path="/" component={ProductList} />
               <Route path="/counter" component={Counter} />
               <Route path="/view/:id" component={ProductDetail} />
+              <Route path="/add" component={AddEditProduct} />
+              <Route path="/edit/:id" component={AddEditProduct} />
               <Route component={NotFound} />
             </Switch>
           </ConnectedRouter>

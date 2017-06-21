@@ -1,9 +1,9 @@
 import Types from '../common/types';
 
-const product = (state = { productList: [{ id: 1, name: "test", creationDate: "test", description: "test" }], product:{} }, action) => {
+const product = (state = { productList: [], product: {} }, action) => {
 	switch (action.type) {
 		case Types.GET_PRODUCTS:
-			return { ...state, productList: action.payload }
+			return { ...state, productList: action.payload, product: {} }
 		case Types.GET_PRODUCT:
 			return { ...state, product: action.payload };
 		case Types.SAVE_PRODUCT:

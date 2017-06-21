@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 class Footer extends Component {
 	render() {
 		return (
-			<h1 className="text-center">
-				This is a Footer
-	 </h1>
+			<footer>
+				<hr />
+				<h3 className="pull-right">ReactJS Test task</h3>
+			</footer>
 		);
 	}
 }

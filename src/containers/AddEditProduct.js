@@ -26,8 +26,10 @@ class AddEditProduct extends React.Component {
 	componentDidMount() {
 		var id = null;
 		if (this.props.match.path.indexOf("edit") >= 0) {
-			id = this.props.match.params.id;
+			id = this.props.match.params.id;;
 		}
+		
+		this.props.getProduct(id);
 	}
 
 	handleFormSubmit(fields) {
@@ -36,22 +38,26 @@ class AddEditProduct extends React.Component {
 	}
 
 	render() {
-		const { handleSubmit } = this.props;
+		const { handleSubmit, pristine, reset, submitting } = this.props;
+		console.log(this.props.initialValues);
 		return (
 			<div className="row">
-				<div className="col-md-offset-1 col-md-8">
-					<h1>Add edit product</h1>
-					<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-						<Field name="name" className="form-control" type="text" label="Name" component={HorizontalField} />
-						<Field name="price" className="form-control" type="text" label="Price" component={HorizontalField} />
-						<Field name="description" className="form-control" type="text" label="Description" component={HorizontalField} />
-						<Field name="creationDate" className="form-control date-picker-input" type="text" label="Creation Date" component={DatePicker} />
-						{this.renderMessage()}
-						<div className="form-group">
-							<button type="submit" className="btn btn-primary edit-button-width"><i className="fa fa-floppy-o"></i> Lưu</button>
-						</div>
-					</form>
-				</div>
+				{
+					this.props.initialValues &&
+					<div className="col-md-offset-1 col-md-8">
+						<h1>Add edit product</h1>
+						<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+							<Field name="name" className="form-control" type="text" label="Name" component={HorizontalField} />
+							<Field name="price" className="form-control" type="text" label="Price" component={HorizontalField} />
+							<Field name="description" className="form-control" type="text" label="Description" component={HorizontalField} />
+							<Field name="creationDate" className="form-control date-picker-input" type="text" label="Creation Date" component={DatePicker} />
+							{this.renderMessage()}
+							<div className="form-group">
+								<button type="submit" className="btn btn-primary edit-button-width" disabled={pristine || submitting}><i className="fa fa-floppy-o"></i> Save</button>
+							</div>
+						</form>
+					</div>
+				}
 			</div>
 		)
 	}
@@ -96,8 +102,7 @@ function validate(values) {
 	if (!values.description) {
 		errors.description = 'Description name is required';
 	}
-	if(!values.creationDate)
-	{
+	if (!values.creationDate) {
 		errors.creationDate = 'Creation date is required';
 	}
 	return errors;
@@ -105,7 +110,7 @@ function validate(values) {
 
 // Decorate the form component
 AddEditProduct = reduxForm({
-	form: 'AddEditProductForm', // a unique name for this form,
+	form: 'add-edit-product-form', // a unique name for this form,
 	validate: validate
 })(AddEditProduct);
 

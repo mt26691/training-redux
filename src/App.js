@@ -15,10 +15,10 @@ import AddEditProduct from './containers/AddEditProduct';
 class App extends Component {
   render() {
     return (
-      <main>
-        <Header />
-        <main className="container">
-          <ConnectedRouter history={this.props.history}>
+      <main className="container">
+        <ConnectedRouter history={this.props.history}>
+          <div>
+            <Header />
             <Switch>
               <Route exact path="/" component={ProductList} />
               <Route path="/counter" component={Counter} />
@@ -27,8 +27,8 @@ class App extends Component {
               <Route path="/edit/:id" component={AddEditProduct} />
               <Route component={NotFound} />
             </Switch>
-          </ConnectedRouter>
-        </main>
+          </div>
+        </ConnectedRouter>
         <Footer />
       </main>
     );

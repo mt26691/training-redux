@@ -40,7 +40,7 @@ export function getProduct(id) {
 	else {
 		product = products.find(t => t.id === id);
 	}
-	
+
 
 	return function (dispath) {
 		setTimeout(() => {
@@ -53,8 +53,25 @@ export function getProduct(id) {
 }
 
 export function saveProduct(product) {
+	var products = getAllProducts();
+
+	var existProductIndex = products.findIndex(t => t.id === product.id);
+
+	if (existProductIndex >= 0) {
+		products.splice(existProductIndex, 1, product);
+	}
+	else {
+		product.id = Date.now().toString();
+		products.push(product);
+	}
+
+	saveProducts(products);
+
 	return {
-		type: Types.SAVE_PRODUCT
+		type: Types.SAVE_PRODUCT,
+		payload: product,
+		message: "Product is saved successfully",
+		isOk: true
 	};
 }
 

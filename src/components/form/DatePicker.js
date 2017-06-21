@@ -15,7 +15,7 @@ export default class DatePicker extends React.Component {
 				showYearDropdown
 				scrollableYearDropdown 
 				placeholderText={label}
-				dateFormat={constants.DEFAULT_DATE_FORMAT} className={className} {...input} selected={input.value ? moment(input.value) : moment()} />
+				dateFormat={constants.DEFAULT_DATE_FORMAT} className={className} {...input} selected={input.value ? moment(input.value) : null} />
 			{touched && error && <span className="error-validation">{error}</span>}
 		</div>);
 

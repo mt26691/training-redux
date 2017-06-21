@@ -28,13 +28,12 @@ class AddEditProduct extends React.Component {
 		if (this.props.match.path.indexOf("edit") >= 0) {
 			id = this.props.match.params.id;;
 		}
-		
+
 		this.props.getProduct(id);
 	}
 
 	handleFormSubmit(fields) {
-		console.log(fields);
-		// this.props.saveCategory(fields);
+		this.props.saveProduct(fields);
 	}
 
 	render() {
@@ -63,14 +62,14 @@ class AddEditProduct extends React.Component {
 	}
 
 	renderMessage() {
-		if (this.props.isSaveOk) {
+		if (this.props.isOk) {
 			return (
 				<div className="alert alert-success">
 					{this.props.message}
 				</div>
 			);
 		}
-		else if (this.props.isSaveOk === false) {
+		else if (this.props.isOk === false) {
 			return (
 				<div className="alert alert-danger">
 					{this.props.message}
@@ -82,8 +81,9 @@ class AddEditProduct extends React.Component {
 
 function mapStateToProp(state) {
 	return {
-		product: state.product.product,
+		isOk: state.product.isOk,
 		initialValues: state.product.product,
+		message:state.product.message
 	};
 }
 

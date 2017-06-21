@@ -4,12 +4,18 @@ import { getProducts, getProduct, deleteProduct, saveProduct } from "../actions/
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
+import Pagination from "react-js-pagination";
 
 class ProductList extends Component {
 
 	componentWillMount() {
 		this.props.getProducts();
 	}
+
+	onChangePage(pageNumber) {
+		this.props.getProducts(pageNumber);
+	}
+
 	render() {
 		return (
 			<div className="row">
@@ -33,23 +39,34 @@ class ProductList extends Component {
 					</thead>
 					<tbody>
 						{
-							this.props.productList.map((product, index) => {
+							this.props.products.productList.map((product, index) => {
 								return <Product product={product} key={index} />
 							})
 						}
 					</tbody>
 				</table>
+
+				<Pagination totalItemsCount={this.props.total}
+					activePage={this.props.currentPage}
+					itemsCountPerPage={this.props.pageSize} onChange={this.onChangePage.bind(this)} />
 			</div>
 		);
 	}
 }
 
 ProductList.propTypes = {
-	productList: PropTypes.array.isRequired
+	products: PropTypes.object.isRequired,
+	total: PropTypes.number.isRequired,
+	currentPage: PropTypes.number.isRequired,
+	pageSize: PropTypes.number.isRequired,
+
 }
 
 const mapStateToProps = state => ({
-	productList: state.product.productList
+	products: state.product.products,
+	total: state.product.products.total,
+	currentPage: state.product.products.currentPage,
+	pageSize:state.product.products.pageSize
 })
 
 export default connect(mapStateToProps, { getProducts, getProduct, deleteProduct, saveProduct })(ProductList);

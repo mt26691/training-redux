@@ -15,12 +15,18 @@ function saveProducts(products) {
 	localStorage.setItem(constants.PRODUCTS_STORAGE, JSON.stringify(products));
 }
 
-export function getProducts(page = 1, pageSize = 5) {
+export function getProducts(page = constants.DEFAULT_PAGE, pageSize = constants.DEFAULT_PAGESIZE) {
 	var products = getAllProducts();
+	console.log(products);
+	var startIndex = (page - 1) * pageSize;
+	var total = products.length;
+	
 
 	return function (dispath) {
 		setTimeout(() => {
-			dispath({ type: Types.GET_PRODUCTS, payload: products });
+			products = products.sort((a, b) => a.id - b.id).splice(startIndex, pageSize);
+			
+			dispath({ type: Types.GET_PRODUCTS, payload: { productList: products, total: total, currentPage: page, pageSize: pageSize } });
 		}, 100);
 	}
 }

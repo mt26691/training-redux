@@ -1,9 +1,10 @@
 import Types from '../common/types';
+import constants from '../common/constants';
 
-const product = (state = { productList: [], product: null, message: null, isOk: null }, action) => {
+const product = (state = { products: { productList: [], total: 0, currentPage: constants.DEFAULT_PAGE, pageSize: constants.DEFAULT_PAGESIZE }, product: null, message: null, isOk: null }, action) => {
 	switch (action.type) {
 		case Types.GET_PRODUCTS:
-			return { ...state, productList: action.payload, product: null, message: null, isOk: null }
+			return { ...state, products: action.payload, product: null, message: null, isOk: null }
 		case Types.GET_PRODUCT:
 			return { ...state, product: action.payload, message: null, isOk: null };
 		case Types.SAVE_PRODUCT:

@@ -17,16 +17,18 @@ function saveProducts(products) {
 
 export function getProducts(page = constants.DEFAULT_PAGE, pageSize = constants.DEFAULT_PAGESIZE) {
 	var products = getAllProducts();
-	console.log(products);
 	var startIndex = (page - 1) * pageSize;
 	var total = products.length;
-	
+
 
 	return function (dispath) {
+		dispath({ type: Types.START_LOADING, id: Types.GET_PRODUCTS });
 		setTimeout(() => {
+
 			products = products.sort((a, b) => a.id - b.id).splice(startIndex, pageSize);
-			
+
 			dispath({ type: Types.GET_PRODUCTS, payload: { productList: products, total: total, currentPage: page, pageSize: pageSize } });
+			dispath({ type: Types.END_LOADING, id: Types.GET_PRODUCTS });
 		}, 100);
 	}
 }
@@ -49,11 +51,13 @@ export function getProduct(id) {
 
 
 	return function (dispath) {
+		dispath({ type: Types.START_LOADING, id: Types.GET_PRODUCT });
 		setTimeout(() => {
 			dispath({
 				type: Types.GET_PRODUCT,
 				payload: product
 			});
+			dispath({ type: Types.END_LOADING, id: Types.GET_PRODUCT });
 		}, 100);
 	}
 }
@@ -73,12 +77,18 @@ export function saveProduct(product) {
 
 	saveProducts(products);
 
-	return {
-		type: Types.SAVE_PRODUCT,
-		payload: product,
-		message: "Product is saved successfully",
-		isOk: true
-	};
+	return function (dispath) {
+		dispath({ type: Types.START_LOADING, id: Types.SAVE_PRODUCT });
+		setTimeout(() => {
+			dispath({
+				type: Types.SAVE_PRODUCT,
+				payload: product,
+				message: "Product is saved successfully",
+				isOk: true
+			});
+			dispath({ type: Types.END_LOADING, id: Types.SAVE_PRODUCT });
+		}, 100);
+	}
 }
 
 

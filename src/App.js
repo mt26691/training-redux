@@ -11,6 +11,7 @@ import ProductDetail from './containers/ProductDetail';
 import ProductList from './containers/ProductList';
 import NotFound from './components/NotFound';
 import AddEditProduct from './containers/AddEditProduct';
+import LoadingIndicator from './containers/LoadingIndicator/LoadingIndicator';
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
             </Switch>
           </div>
         </ConnectedRouter>
+        <LoadingIndicator/>
         <Footer />
       </main>
     );

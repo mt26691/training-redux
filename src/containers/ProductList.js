@@ -8,12 +8,25 @@ import Pagination from "react-js-pagination";
 
 class ProductList extends Component {
 
-	componentWillMount() {
+	componentDidMount() {
+		console.log("component did mount");
 		this.props.getProducts();
+	}
+
+	componentDidUpdate() {
+
+		if (this.props.forceLoad) {
+			this.props.getProducts(this.props.currentPage);
+		}
+
 	}
 
 	onChangePage(pageNumber) {
 		this.props.getProducts(pageNumber);
+	}
+
+	deleteProduct(productId) {
+		this.props.deleteProduct(productId);
 	}
 
 	render() {
@@ -40,7 +53,7 @@ class ProductList extends Component {
 					<tbody>
 						{
 							this.props.products.productList.map((product, index) => {
-								return <Product product={product} key={index} />
+								return <Product product={product} key={index} deleteProduct={this.deleteProduct.bind(this)} />
 							})
 						}
 					</tbody>
@@ -49,6 +62,7 @@ class ProductList extends Component {
 				<Pagination totalItemsCount={this.props.total}
 					activePage={this.props.currentPage}
 					itemsCountPerPage={this.props.pageSize} onChange={this.onChangePage.bind(this)} />
+				{this.props.deleteMessage && <div className="alert alert-success">{this.props.deleteMessage}</div>}
 			</div>
 		);
 	}
@@ -59,6 +73,8 @@ ProductList.propTypes = {
 	total: PropTypes.number.isRequired,
 	currentPage: PropTypes.number.isRequired,
 	pageSize: PropTypes.number.isRequired,
+	forceLoad: PropTypes.bool.isRequired,
+	deleteMessage: PropTypes.string,
 
 }
 
@@ -66,7 +82,9 @@ const mapStateToProps = state => ({
 	products: state.product.products,
 	total: state.product.products.total,
 	currentPage: state.product.products.currentPage,
-	pageSize:state.product.products.pageSize
+	pageSize: state.product.products.pageSize,
+	forceLoad: state.product.forceLoad,
+	deleteMessage: state.product.deleteMessage
 })
 
 export default connect(mapStateToProps, { getProducts, getProduct, deleteProduct, saveProduct })(ProductList);

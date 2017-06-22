@@ -94,7 +94,16 @@ export function saveProduct(product) {
 
 
 export function deleteProduct(productId) {
-	return {
-		type: Types.DELETE_PRODUCT
-	};
+	var products = getAllProducts();
+	products = products.filter(t => t.id !== productId);
+	saveProducts(products);
+
+	return function (dispath) {
+		dispath({ type: Types.START_LOADING, id: Types.DELETE_PRODUCT });
+		setTimeout(() => {
+			dispath({ type: Types.DELETE_PRODUCT, payload: productId, deleteMessage: "Product is deleted" });
+			dispath({ type: Types.END_LOADING, id: Types.DELETE_PRODUCT });
+		}, 100);
+
+	}
 }

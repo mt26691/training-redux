@@ -5,12 +5,12 @@ export default class Product extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onDelete = this.onDelete.bind(this);
   }
 
 
   onDelete(e) {
-    // AppAcion.deleteProduct(this.props.product.id);
+    e.preventDefault();
+    this.props.deleteProduct(this.props.product.id);
   }
 
   render() {
@@ -30,6 +30,7 @@ export default class Product extends React.Component {
           <Link to={editLink} className="btn btn-warning" >Edit</Link>
         </td>
         <td>
+          <button className="btn btn-danger" onClick={this.onDelete.bind(this)}> Delete</button>
           {/*<Confirm
             onConfirm={this.onDelete}
             body="Do you want to delete this product?"

@@ -36,7 +36,7 @@ class ProductDetail extends Component {
 					Description: {product.description}
 				</h3>
 				<h3>
-					{/*Creation Date: {product.creationDate.format(AppConstants.DEFAULT_DATE_FORMAT)}*/}
+					Creation Date: {product.creationDate}
 				</h3>
 				<h3>
 				</h3>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import logo from './logo.svg';
 import './App.css';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router';

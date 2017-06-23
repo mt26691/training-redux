@@ -1,6 +1,5 @@
 import Types from '../common/types';
 import constants from '../common/constants';
-import axios from 'axios';
 
 function getAllProducts() {
 	var products = JSON.parse(localStorage.getItem(constants.PRODUCTS_STORAGE));

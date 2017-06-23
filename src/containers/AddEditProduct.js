@@ -38,8 +38,7 @@ class AddEditProduct extends React.Component {
 	}
 
 	render() {
-		const { handleSubmit, pristine, reset, submitting } = this.props;
-		console.log(this.props.initialValues);
+		const { handleSubmit, pristine, submitting } = this.props;
 		return (
 			<div className="row">
 				{

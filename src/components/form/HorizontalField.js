@@ -3,7 +3,7 @@ import React from 'react';
 export default class HorizontalField extends React.Component {
 
     render() {
-        const { input, label, type, isDisabled, disabled, className, meta: { touched, error, warning } } = this.props;
+        const { input, label, type, isDisabled, className, meta: { touched, error, warning } } = this.props;
         let containerClassName = (touched && error) ? "form-group has-error" : "form-group";
         return (<div className={containerClassName}>
             <label>{label}</label>

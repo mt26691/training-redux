@@ -6,7 +6,7 @@ import constants from '../../common/constants';
 export default class DatePicker extends React.Component {
 
 	render() {
-		const { input, label, type, isDisabled, disabled, className, meta: { touched, error, warning } } = this.props;
+		const { input, label, className, meta: { touched, error } } = this.props;
 
 		let containerClassName = (touched && error) ? "form-group has-error" : "form-group";
 		return (<div className={containerClassName}>

@@ -9,7 +9,6 @@ import Pagination from "react-js-pagination";
 class ProductList extends Component {
 
 	componentDidMount() {
-		console.log("component did mount");
 		this.props.getProducts();
 	}
 
